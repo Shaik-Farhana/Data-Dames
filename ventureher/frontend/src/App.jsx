@@ -10,6 +10,8 @@ const C = {
   text: "#2d1b35", muted: "#a0688a", white: "#ffffff",
 };
 
+const toNumber = (value) => Number(value) || 0;
+
 const Spinner = () => (
   <span style={{ display: "inline-block", width: 18, height: 18, border: `2px solid ${C.pink}`, borderTopColor: "transparent", borderRadius: "50%", animation: "spin .7s linear infinite" }} />
 );
@@ -174,10 +176,24 @@ function LogScreen() {
   const [result, setResult] = useState(null);
   const [history, setHistory] = useState([]);
   const [error, setError] = useState(null);
+  useEffect(() => {
+    getDashboard()
+      .then((d) => {
+        const dashboard = d.data || d;
+        setHistory(Array.isArray(dashboard?.transactions) ? dashboard.transactions : []);
+      })
+      .catch(() => {});
+  }, []);
   const submit = async () => {
     if (!text.trim()) return;
     setLoading(true); setResult(null); setError(null);
-    try { const d = await addTransaction(text); setResult(d.parsed); if (d.parsed?.transactions) setHistory(p => [...d.parsed.transactions, ...p]); setText(""); }
+    try {
+      const d = await addTransaction(text);
+      setResult(d.parsed);
+      const dashboard = d.dashboard || d.data || {};
+      if (Array.isArray(dashboard.transactions)) setHistory(dashboard.transactions);
+      setText("");
+    }
     catch { setError("Could not process. Is backend running?"); }
     finally { setLoading(false); }
   };
@@ -203,10 +219,10 @@ function LogScreen() {
       {result && (
         <div className="fadeUp">
           <Card style={{ borderColor: C.green + "55", background: C.green + "08", marginBottom: 14 }}>
-            <p style={{ color: C.green, fontWeight: 700, marginBottom: 10 }}>✅ {result.summary}</p>
+            <p style={{ color: C.green, fontWeight: 700, marginBottom: 10 }}>✅ {typeof result.summary === "string" ? result.summary : "Entry logged successfully!"}</p>
             <div style={{ display: "flex", justifyContent: "space-between", padding: "10px 0", borderTop: `1px solid ${C.border}` }}>
               <span style={{ color: C.muted, fontSize: 13 }}>This entry net:</span>
-              <span style={{ color: result.net_profit_inr >= 0 ? C.green : C.red, fontWeight: 800, fontSize: 16 }}>{result.net_profit_inr >= 0 ? "+" : ""}₹{result.net_profit_inr}</span>
+              <span style={{ color: toNumber(result.net_profit_inr) >= 0 ? C.green : C.red, fontWeight: 800, fontSize: 16 }}>{toNumber(result.net_profit_inr) >= 0 ? "+" : ""}₹{toNumber(result.net_profit_inr)}</span>
             </div>
           </Card>
         </div>
@@ -223,7 +239,7 @@ function LogScreen() {
                 </div>
                 <p style={{ color: C.text, fontSize: 14 }}>{t.description}</p>
               </div>
-              <span style={{ fontWeight: 800, fontSize: 17, color: t.type === "income" ? C.green : C.red }}>{t.type === "income" ? "+" : "-"}₹{t.amount_inr}</span>
+              <span style={{ fontWeight: 800, fontSize: 17, color: t.type === "income" ? C.green : C.red }}>{t.type === "income" ? "+" : "-"}₹{toNumber(t.amount_inr)}</span>
             </div>
           ))}
         </Card>
@@ -239,10 +255,10 @@ function DashboardScreen() {
   useEffect(() => { getDashboard().then(d => setData(d.data || d)).catch(() => setError("Could not load dashboard.")).finally(() => setLoading(false)); }, []);
   if (loading) return <div style={{ textAlign: "center", paddingTop: 60 }}><Spinner /><p style={{ color: C.muted, marginTop: 14 }}>Loading your numbers...</p></div>;
   if (error) return <Card style={{ borderColor: C.red + "44" }}><p style={{ color: C.red }}>{error}</p></Card>;
-  const rev = data?.total_revenue || 0, exp = data?.total_expenses || 0, prof = data?.net_profit || 0, txns = data?.transactions || [];
+  const rev = toNumber(data?.total_revenue), exp = toNumber(data?.total_expenses), prof = toNumber(data?.net_profit), txns = Array.isArray(data?.transactions) ? data.transactions : [];
   const barData = [{ name: "Revenue", value: rev, color: C.green }, { name: "Expenses", value: exp, color: C.red }, { name: "Profit", value: Math.max(prof, 0), color: C.pink }];
   const cats = {};
-  txns.filter(t => t.type === "expense").forEach(t => { cats[t.category] = (cats[t.category] || 0) + t.amount_inr; });
+  txns.filter(t => t.type === "expense").forEach(t => { cats[t.category] = (cats[t.category] || 0) + toNumber(t.amount_inr); });
   const catData = Object.entries(cats).map(([name, value]) => ({ name, value }));
   const clrs = [C.pink, C.purple, C.gold, C.green, C.muted];
   return (
@@ -296,7 +312,7 @@ function DashboardScreen() {
           <p style={{ color: C.gold, fontSize: 11, fontWeight: 700, marginBottom: 8, letterSpacing: .5 }}>🤖 AI SPENDING PATTERN DETECTED</p>
           <p style={{ color: C.text, fontSize: 14, lineHeight: 1.7 }}>{data.clusters.insight}</p>
           <div style={{ display: "flex", gap: 8, marginTop: 12, flexWrap: "wrap" }}>
-            {Array.from({ length: data.clusters.n_clusters }, (_, i) => (
+            {data.clusters.n_clusters > 0 && Array.from({ length: data.clusters.n_clusters }, (_, i) => (
               <Pill key={i} color={[C.pink, C.purple, C.gold][i % 3]}>Cluster {i + 1}</Pill>
             ))}
           </div>

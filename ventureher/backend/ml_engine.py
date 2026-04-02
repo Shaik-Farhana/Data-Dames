@@ -12,9 +12,17 @@ CATEGORY_MAP = {
 
 CLUSTER_LABELS = [
     "Essential daily costs",
-    "Growth investments", 
+    "Growth investments",
     "Irregular spending"
 ]
+
+
+def _amount(value):
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return 0.0
+
 
 def cluster_expenses(transactions: list) -> dict:
     expenses = [t for t in transactions if t["type"] == "expense"]
@@ -22,13 +30,15 @@ def cluster_expenses(transactions: list) -> dict:
     if len(expenses) < 3:
         return {
             "available": False,
-            "insight": "Add at least 3 expense entries to see your spending patterns.",
+            "insight": (
+                "Add at least 3 expense entries to see your spending patterns."
+            ),
             "labeled_transactions": [],
             "n_clusters": 0
         }
 
     features = [
-        [t["amount_inr"], CATEGORY_MAP.get(t["category"], 4)]
+        [_amount(t["amount_inr"]), CATEGORY_MAP.get(t["category"], 4)]
         for t in expenses
     ]
 
@@ -46,7 +56,9 @@ def cluster_expenses(transactions: list) -> dict:
         cluster_totals.setdefault(int(label), []).append(features[i][0])
 
     biggest_cluster = max(cluster_totals, key=lambda k: sum(cluster_totals[k]))
-    biggest_avg = sum(cluster_totals[biggest_cluster]) / len(cluster_totals[biggest_cluster])
+    biggest_avg = sum(cluster_totals[biggest_cluster]) / len(
+        cluster_totals[biggest_cluster]
+    )
 
     # Attach cluster labels to transactions
     labeled = []
@@ -54,13 +66,17 @@ def cluster_expenses(transactions: list) -> dict:
         labeled.append({
             **t,
             "cluster": int(labels[i]),
-            "cluster_label": CLUSTER_LABELS[int(labels[i]) % len(CLUSTER_LABELS)]
+            "cluster_label": CLUSTER_LABELS[
+                int(labels[i]) % len(CLUSTER_LABELS)
+            ]
         })
 
     insight = (
         f"Your spending falls into {n_clusters} patterns. "
-        f"Your highest-cost cluster averages ₹{biggest_avg:.0f} per transaction. "
-        f"Reducing frequency in this cluster could significantly boost your weekly profit."
+        f"Your highest-cost cluster averages ₹{biggest_avg:.0f} per "
+        f"transaction. "
+        f"Reducing frequency in this cluster could significantly boost your "
+        f"weekly profit."
     )
 
     return {

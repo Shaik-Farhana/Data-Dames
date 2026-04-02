@@ -71,6 +71,13 @@ class TransactionInput(BaseModel):
     text: str
 
 
+def _amount(value):
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return 0.0
+
+
 @app.post("/add-transaction")
 async def add_transaction_route(data: TransactionInput):
     try:
@@ -98,12 +105,12 @@ async def add_transaction_route(data: TransactionInput):
 
         # Calculate running totals
         total_revenue = sum(
-            t["amount_inr"]
+            _amount(t["amount_inr"])
             for t in all_transactions
             if t["type"] == "income"
         )
         total_expenses = sum(
-            t["amount_inr"]
+            _amount(t["amount_inr"])
             for t in all_transactions
             if t["type"] == "expense"
         )
