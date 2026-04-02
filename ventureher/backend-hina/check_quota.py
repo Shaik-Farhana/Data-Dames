@@ -8,7 +8,7 @@ client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
 print("Sending ONE request to Gemini...")
 try:
     resp = client.models.generate_content(
-        model="gemini-2.0-flash",
+        model="gemini-1.5-flash",
         contents='Say hello in JSON like this: {"message": "hello"}'
     )
     print("SUCCESS!")

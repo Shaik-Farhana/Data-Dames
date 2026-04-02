@@ -77,7 +77,7 @@ Write a voice message that will be read aloud. MAXIMUM 75 words. Must include:
 
 Example style: "Amazing work this week! You turned ₹X into ₹Y profit.
 Your biggest cost was packaging - try buying in bulk to save ₹50 a week.
-I recommend putting ₹{profit//4} into a Parag Parikh Flexi Cap SIP this month - 
+"I recommend putting ₹500 into a Parag Parikh Flexi Cap SIP this month - it's one of India's safest funds for beginners."
 it's one of India's safest funds for beginners."
 
 Return ONLY the voice message text. No labels, no JSON.
