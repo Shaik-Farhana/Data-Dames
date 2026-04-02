@@ -1,312 +1,764 @@
 <!DOCTYPE html>
-
-<html class="light" lang="en">
+<html lang="en">
 
 <head>
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-  <title>VentureHer - Business Results</title>
-  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  <script src="../api.js"></script>
+  <title>VentureHer – Home</title>
   <link
-    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&amp;family=Manrope:wght@400;500;600;700&amp;display=swap"
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&family=Manrope:wght@400;500;600;700&display=swap"
     rel="stylesheet" />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1"
     rel="stylesheet" />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-    rel="stylesheet" />
-  <script id="tailwind-config">
-    tailwind.config = {
-      darkMode: "class",
-      theme: {
-        extend: {
-          colors: {
-            "on-surface-variant": "#45464d",
-            "surface-tint": "#565e74",
-            "secondary": "#712ae2",
-            "on-tertiary-fixed": "#3e0022",
-            "on-secondary": "#ffffff",
-            "primary-fixed-dim": "#bec6e0",
-            "on-tertiary-container": "#e64394",
-            "surface-container-low": "#f2f4f6",
-            "surface-container-highest": "#e0e3e5",
-            "outline": "#76777d",
-            "on-error-container": "#93000a",
-            "tertiary-fixed": "#ffd9e4",
-            "secondary-fixed": "#eaddff",
-            "surface-container": "#eceef0",
-            "primary-fixed": "#dae2fd",
-            "inverse-surface": "#2d3133",
-            "tertiary": "#000000",
-            "primary": "#000000",
-            "on-secondary-container": "#fffbff",
-            "tertiary-container": "#3e0022",
-            "on-primary-container": "#7c839b",
-            "on-tertiary": "#ffffff",
-            "on-background": "#191c1e",
-            "surface": "#f7f9fb",
-            "on-secondary-fixed": "#25005a",
-            "surface-bright": "#f7f9fb",
-            "on-primary": "#ffffff",
-            "primary-container": "#131b2e",
-            "secondary-fixed-dim": "#d2bbff",
-            "tertiary-fixed-dim": "#ffb0cd",
-            "surface-container-high": "#e6e8ea",
-            "surface-container-lowest": "#ffffff",
-            "secondary-container": "#8a4cfc",
-            "surface-dim": "#d8dadc",
-            "on-primary-fixed-variant": "#3f465c",
-            "on-secondary-fixed-variant": "#5a00c6",
-            "inverse-primary": "#bec6e0",
-            "error-container": "#ffdad6",
-            "on-primary-fixed": "#131b2e",
-            "error": "#ba1a1a",
-            "on-error": "#ffffff",
-            "inverse-on-surface": "#eff1f3",
-            "on-tertiary-fixed-variant": "#8c0053",
-            "on-surface": "#191c1e",
-            "outline-variant": "#c6c6cd",
-            "background": "#f7f9fb",
-            "surface-variant": "#e0e3e5"
-          },
-          fontFamily: {
-            "headline": ["Plus Jakarta Sans"],
-            "body": ["Manrope"],
-            "label": ["Manrope"]
-          },
-          borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
-        },
-      },
-    }
-  </script>
   <style>
-    .material-symbols-outlined {
-      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    :root {
+      --primary-container: #131b2e;
+      --secondary: #712ae2;
+      --secondary-container: #8a4cfc;
+      --secondary-fixed: #eaddff;
+      --surface: #f7f9fb;
+      --surface-low: #f2f4f6;
+      --surface-lowest: #ffffff;
+      --surface-high: #e6e8ea;
+      --surface-highest: #e0e3e5;
+      --on-surface: #191c1e;
+      --on-surface-variant: #45464d;
+      --outline-variant: #c6c6cd;
+      --tertiary-container: #3e0022;
+      --pink: #e64394;
     }
 
-    .glass-card {
-      background: rgba(255, 255, 255, 0.7);
-      backdrop-filter: blur(20px);
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
-  </style>
-  <style>
+
     body {
-      min-height: max(884px, 100dvh);
+      font-family: 'Manrope', sans-serif;
+      background: var(--surface);
+      color: var(--on-surface);
+      min-height: 100dvh;
+      padding-bottom: 90px;
+      overflow-x: hidden;
+    }
+
+    /* HEADER */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      height: 72px;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(247, 249, 251, 0.75);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      box-shadow: 0 40px 40px -10px rgba(15, 23, 42, 0.05);
+    }
+
+    .logo {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 900;
+      font-size: 1.4rem;
+      background: linear-gradient(135deg, var(--secondary), var(--pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .notif-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: var(--surface-lowest);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--on-surface-variant);
+      box-shadow: 0 2px 12px rgba(15, 23, 42, 0.06);
+    }
+
+    .avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--secondary), var(--pink));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    /* HERO */
+    .hero {
+      margin: 88px 20px 0;
+      border-radius: 32px;
+      background: linear-gradient(145deg, var(--primary-container) 0%, #1e0a3c 50%, #2d0a4a 100%);
+      padding: 36px 28px 0;
+      overflow: hidden;
+      position: relative;
+      min-height: 340px;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -60px;
+      right: -60px;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(113, 42, 226, 0.5), transparent 70%);
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -40px;
+      left: 20px;
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(230, 67, 148, 0.3), transparent 70%);
+    }
+
+    .hero-eyebrow {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.5);
+      margin-bottom: 10px;
+    }
+
+    .hero-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 2.4rem;
+      font-weight: 900;
+      color: white;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin-bottom: 16px;
+    }
+
+    .hero-title span {
+      background: linear-gradient(90deg, #c084fc, var(--pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.6);
+      line-height: 1.6;
+      max-width: 260px;
+      margin-bottom: 28px;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, var(--secondary), var(--secondary-container));
+      color: white;
+      border: none;
+      padding: 14px 24px;
+      border-radius: 16px;
+      font-family: 'Manrope', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.25s;
+      box-shadow: 0 8px 24px rgba(113, 42, 226, 0.45);
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(113, 42, 226, 0.55);
+    }
+
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      font-size: 20px;
+    }
+
+    /* SCAN CARD - floating */
+    .scan-card {
+      position: absolute;
+      bottom: -1px;
+      right: 0;
+      width: 160px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 24px 24px 0 0;
+      padding: 24px 20px 28px;
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-bottom: none;
+    }
+
+    .scan-icon-wrap {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, var(--secondary), var(--pink));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 10px;
+      box-shadow: 0 8px 20px rgba(113, 42, 226, 0.5);
+    }
+
+    .scan-icon-wrap .material-symbols-outlined {
+      color: white;
+      font-size: 26px;
+    }
+
+    .scan-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.9);
+      line-height: 1.3;
+    }
+
+    /* QUICK STATS */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin: 20px 20px 0;
+    }
+
+    .stat-card {
+      background: var(--surface-lowest);
+      border-radius: 20px;
+      padding: 18px 14px;
+      box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+      transition: transform 0.2s;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-2px);
+    }
+
+    .stat-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+
+    .stat-icon.purple {
+      background: rgba(113, 42, 226, 0.1);
+    }
+
+    .stat-icon.pink {
+      background: rgba(230, 67, 148, 0.1);
+    }
+
+    .stat-icon.green {
+      background: rgba(34, 197, 94, 0.1);
+    }
+
+    .stat-icon .material-symbols-outlined {
+      font-size: 16px;
+    }
+
+    .stat-icon.purple .material-symbols-outlined {
+      color: var(--secondary);
+    }
+
+    .stat-icon.pink .material-symbols-outlined {
+      color: var(--pink);
+    }
+
+    .stat-icon.green .material-symbols-outlined {
+      color: #22c55e;
+    }
+
+    .stat-num {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--primary-container);
+    }
+
+    .stat-label {
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: var(--on-surface-variant);
+      margin-top: 2px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* SECTION TITLES */
+    .section-wrap {
+      padding: 0 20px;
+      margin-top: 28px;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--primary-container);
+    }
+
+    .section-link {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--secondary);
+      cursor: pointer;
+    }
+
+    /* JOURNEY TRACK */
+    .journey-track {
+      position: relative;
+      padding-left: 28px;
+    }
+
+    .track-line {
+      position: absolute;
+      left: 7px;
+      top: 8px;
+      bottom: 8px;
+      width: 2px;
+      background: linear-gradient(180deg, var(--secondary), var(--pink), rgba(230, 67, 148, 0.1));
+      border-radius: 2px;
+    }
+
+    .milestone {
+      position: relative;
+      margin-bottom: 24px;
+    }
+
+    .milestone:last-child {
+      margin-bottom: 0;
+    }
+
+    .milestone-dot {
+      position: absolute;
+      left: -28px;
+      top: 4px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 3px solid white;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.12);
+    }
+
+    .milestone-dot.done {
+      background: var(--secondary);
+    }
+
+    .milestone-dot.active {
+      background: linear-gradient(135deg, var(--secondary), var(--pink));
+      animation: pulse-dot 2s infinite;
+    }
+
+    .milestone-dot.locked {
+      background: var(--surface-highest);
+    }
+
+    @keyframes pulse-dot {
+
+      0%,
+      100% {
+        box-shadow: 0 0 0 0 rgba(113, 42, 226, 0.4);
+      }
+
+      50% {
+        box-shadow: 0 0 0 6px rgba(113, 42, 226, 0);
+      }
+    }
+
+    .milestone-tag {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 3px;
+    }
+
+    .milestone-tag.done {
+      color: var(--secondary);
+    }
+
+    .milestone-tag.active {
+      color: var(--pink);
+    }
+
+    .milestone-tag.locked {
+      color: var(--outline-variant);
+    }
+
+    .milestone-name {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--primary-container);
+    }
+
+    .milestone-name.locked {
+      color: var(--outline-variant);
+    }
+
+    .milestone-desc {
+      font-size: 0.82rem;
+      color: var(--on-surface-variant);
+      margin-top: 3px;
+      line-height: 1.5;
+    }
+
+    /* BENTO GRID */
+    .bento-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .bento-card {
+      border-radius: 24px;
+      padding: 22px;
+      background: var(--surface-lowest);
+      box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05);
+      transition: transform 0.2s;
+    }
+
+    .bento-card:hover {
+      transform: translateY(-3px);
+    }
+
+    .bento-card.full {
+      grid-column: 1/-1;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      padding: 20px 24px;
+    }
+
+    .bento-card.dark {
+      background: var(--primary-container);
+    }
+
+    .bento-card .material-symbols-outlined {
+      font-size: 24px;
+    }
+
+    .bento-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .bento-icon.purple {
+      background: rgba(113, 42, 226, 0.12);
+    }
+
+    .bento-icon.purple .material-symbols-outlined {
+      color: var(--secondary);
+    }
+
+    .bento-icon.pink {
+      background: rgba(230, 67, 148, 0.12);
+    }
+
+    .bento-icon.pink .material-symbols-outlined {
+      color: var(--pink);
+    }
+
+    .bento-icon.white {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .bento-icon.white .material-symbols-outlined {
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .bento-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--primary-container);
+      margin-top: 10px;
+    }
+
+    .bento-title.light {
+      color: white;
+    }
+
+    .bento-sub {
+      font-size: 0.78rem;
+      color: var(--on-surface-variant);
+      margin-top: 4px;
+      line-height: 1.4;
+    }
+
+    .bento-sub.light {
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .bento-badge {
+      display: inline-block;
+      background: rgba(113, 42, 226, 0.1);
+      color: var(--secondary);
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 6px;
+      margin-top: 8px;
+    }
+
+    /* BOTTOM NAV */
+    nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      height: 80px;
+      padding: 0 16px;
+      padding-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-radius: 28px 28px 0 0;
+      box-shadow: 0 -8px 40px rgba(15, 23, 42, 0.08);
+    }
+
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+      padding: 8px 16px;
+      border-radius: 16px;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+
+    .nav-item .material-symbols-outlined {
+      font-size: 22px;
+      color: var(--on-surface-variant);
+    }
+
+    .nav-item span.label {
+      font-size: 0.65rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--on-surface-variant);
+    }
+
+    .nav-item.active {
+      background: linear-gradient(135deg, var(--secondary), var(--secondary-container));
+      padding: 8px 20px;
+    }
+
+    .nav-item.active .material-symbols-outlined,
+    .nav-item.active span.label {
+      color: white;
+    }
+
+    .nav-item.active .material-symbols-outlined {
+      font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-up {
+      animation: fadeUp 0.5s ease both;
+    }
+
+    .fade-up:nth-child(1) {
+      animation-delay: 0.05s;
+    }
+
+    .fade-up:nth-child(2) {
+      animation-delay: 0.1s;
+    }
+
+    .fade-up:nth-child(3) {
+      animation-delay: 0.15s;
     }
   </style>
 </head>
 
-<body class="bg-surface font-body text-on-surface antialiased">
-  <!-- TopAppBar -->
-  <header
-    class="fixed top-0 w-full z-50 bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl flex justify-between items-center px-6 h-20 w-full shadow-[0_40px_40px_-10px_rgba(15,23,42,0.06)]">
-    <div class="flex items-center gap-3">
-      <span class="material-symbols-outlined text-slate-900 dark:text-slate-50">grid_view</span>
-      <span
-        class="text-2xl font-black bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent font-['Plus_Jakarta_Sans'] tracking-tight">VentureHer</span>
+<body>
+
+  <header>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <span class="material-symbols-outlined" style="color:var(--secondary);">grid_view</span>
+      <span class="logo">VentureHer</span>
     </div>
-    <div class="hidden md:flex gap-8">
-      <span class="text-slate-500 dark:text-slate-400 font-bold hover:opacity-80 transition-opacity">Home</span>
-      <span class="text-purple-600 dark:text-purple-400 font-bold hover:opacity-80 transition-opacity">Results</span>
-      <span class="text-slate-500 dark:text-slate-400 font-bold hover:opacity-80 transition-opacity">Daily</span>
-      <span class="text-slate-500 dark:text-slate-400 font-bold hover:opacity-80 transition-opacity">Weekly</span>
-    </div>
-    <div class="w-10 h-10 rounded-full bg-secondary-fixed flex items-center justify-center">
-      <span class="material-symbols-outlined text-on-secondary-fixed">person</span>
+    <div class="header-right">
+      <button class="notif-btn"><span class="material-symbols-outlined"
+          style="font-size:18px;">notifications</span></button>
+      <div class="avatar">R</div>
     </div>
   </header>
-  <main class="pt-28 pb-32 px-6 max-w-2xl mx-auto space-y-10">
-    <!-- Hero Section -->
-    <section class="space-y-6">
-      <div class="space-y-2">
-        <span class="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary">Analysis Complete</span>
-        <h1
-          class="text-4xl md:text-5xl font-headline font-extrabold text-primary-container leading-[1.1] tracking-tight">
-          Your Tailored Business Blueprint
-        </h1>
-      </div>
-      <!-- Business Idea Primary Card -->
-      <div class="relative overflow-hidden rounded-[2rem] bg-primary-container p-8 shadow-2xl text-white">
-        <div class="absolute -top-12 -right-12 w-48 h-48 bg-secondary/20 rounded-full blur-3xl"></div>
-        <div class="absolute -bottom-12 -left-12 w-48 h-48 bg-on-tertiary-container/10 rounded-full blur-3xl"></div>
-        <div class="relative z-10 space-y-6">
-          <div class="flex items-center gap-2">
-            <span class="material-symbols-outlined text-secondary-fixed-dim"
-              style="font-variation-settings: 'FILL' 1;">stars</span>
-            <span class="text-sm font-semibold tracking-widest uppercase opacity-80">Recommended Concept</span>
-          </div>
-          <h2 id="bizTitle" class="text-3xl md:text-4xl font-headline font-bold leading-tight">
-            Artisan Eco-Textile <br />Export Hub
-          </h2>
-          <div class="flex flex-wrap gap-3 pt-2">
-            <div
-              class="flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/10">
-              <span class="material-symbols-outlined text-tertiary-fixed-dim text-sm">payments</span>
-              <span id="startupCost" class="text-sm font-bold">Startup: ₹2.5L - 5L</span>
-            </div>
-            <div
-              class="flex items-center gap-2 px-4 py-2 rounded-full bg-on-tertiary-container text-white shadow-lg shadow-on-tertiary-container/30">
-              <span class="material-symbols-outlined text-sm"
-                style="font-variation-settings: 'FILL' 1;">trending_up</span>
-              <span class="text-sm font-bold uppercase tracking-wider">High Potential</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- Asymmetric Metrics Grid -->
-    <section class="grid grid-cols-2 gap-4">
-      <div class="bg-surface-container-lowest p-6 rounded-[1.5rem] space-y-3">
-        <p class="text-on-surface-variant text-sm font-medium">Market Demand</p>
-        <p class="text-2xl font-headline font-bold text-primary">Very High</p>
-        <div class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden">
-          <div class="bg-secondary h-full w-[85%]"></div>
-        </div>
-      </div>
-      <div class="bg-secondary p-6 rounded-[1.5rem] text-white space-y-3">
-        <p class="opacity-80 text-sm font-medium">Competition</p>
-        <p class="text-2xl font-headline font-bold">Moderate</p>
-        <div class="w-full bg-white/20 h-1.5 rounded-full overflow-hidden">
-          <div class="bg-white h-full w-[45%]"></div>
-        </div>
-      </div>
-    </section>
-    <!-- Trailblazer Progress Track / 3 Steps -->
-    <section class="space-y-8">
-      <h3 class="text-2xl font-headline font-bold text-primary-container">Next Steps to Launch</h3>
-      <div class="relative space-y-12 pl-10">
-        <!-- Vertical Progress Line -->
-        <div
-          class="absolute left-[11px] top-2 bottom-2 w-0.5 bg-gradient-to-b from-secondary via-on-tertiary-container to-surface-container-high">
-        </div>
-        <!-- Step 1 -->
-        <div class="relative group">
-          <div
-            class="absolute -left-10 top-0 w-6 h-6 rounded-full bg-secondary flex items-center justify-center ring-4 ring-surface-container-low z-10">
-            <span class="text-[10px] font-black text-white">1</span>
-          </div>
-          <div class="space-y-3">
-            <div class="flex items-center gap-3">
-              <span class="material-symbols-outlined text-secondary text-2xl">verified_user</span>
-              <h4 class="text-xl font-bold font-headline" id="step1Title">Verify Sourcing</h4>
-            </div>
-            <p id="step1Desc" class="text-lg text-on-surface-variant leading-relaxed">
-              Identify five certified weaver clusters in Jaipur or Kanchipuram to ensure ethical supply chains.
-            </p>
-          </div>
-        </div>
-        <!-- Step 2 -->
-        <div class="relative group">
-          <div
-            class="absolute -left-10 top-0 w-6 h-6 rounded-full bg-on-tertiary-container flex items-center justify-center ring-4 ring-surface-container-low z-10">
-            <span class="text-[10px] font-black text-white">2</span>
-          </div>
-          <div class="space-y-3">
-            <div class="flex items-center gap-3">
-              <span class="material-symbols-outlined text-on-tertiary-container text-2xl">web</span>
-              <h4 class="text-xl font-bold font-headline" id="step2Title">Digital Presence</h4>
-            </div>
-            <p id="step2Desc" class="text-lg text-on-surface-variant leading-relaxed">
-              Build a high-end editorial Shopify store showcasing the "Story of the Fabric" to global buyers.
-            </p>
-          </div>
-        </div>
-        <!-- Step 3 -->
-        <div class="relative group">
-          <div
-            class="absolute -left-10 top-0 w-6 h-6 rounded-full bg-surface-container-highest flex items-center justify-center ring-4 ring-surface-container-low z-10">
-            <span class="text-[10px] font-black text-on-surface">3</span>
-          </div>
-          <div class="space-y-3">
-            <div class="flex items-center gap-3">
-              <span class="material-symbols-outlined text-on-surface-variant text-2xl">hub</span>
-              <h4 class="text-xl font-bold font-headline" id="step3Title">Global Logistics</h4>
-            </div>
-            <p id="step3Desc" class="text-lg text-on-surface-variant leading-relaxed">
-              Register for IEC (Import Export Code) and partner with eco-conscious delivery providers.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- Aesthetic Visual Break -->
-    <div class="w-full aspect-video rounded-[2.5rem] overflow-hidden shadow-2xl relative">
-      <img class="w-full h-full object-cover"
-        data-alt="Close-up of vibrant Indian hand-woven silk textiles with gold embroidery in warm dramatic workshop lighting"
-        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAH9QYQ-3g5dqUI0x_dQFiXqBdwvMRZWjoBM03GFeH5aCDD9n9WGZlJ79CmyIUegk0G0S4HrYjtFdNPwjDQwv0vnlk0clr56_7Y_LFXXK3Z-64dyDsHE8GwWzubSPP082NBxtqVPGxlTMr2AFscCWlRJh0SSirP0wPkGc10X05c5RASENNQktn9VmU5D7BfULV80mPBrHTWa5sL0xa6nllpuIuqP5z36WzEMw7LxC-0FeidmVcA5sX6yNHbtnaf8_pXOb_v-Mf8HY11" />
-      <div class="absolute inset-0 bg-gradient-to-t from-primary-container/80 to-transparent flex items-end p-8">
-        <p class="text-white text-lg font-medium italic">"Tradition meets modern commerce."</p>
-      </div>
-    </div>
-    <div class="pt-6 space-y-3">
-      <button id="planBtn"
-        onclick="generateReport()"
-        class="w-full py-6 bg-gradient-to-br from-secondary to-secondary-container text-white rounded-[1.5rem] font-bold text-xl shadow-xl shadow-secondary/30 hover:scale-[1.02] active:scale-95 transition-all">
-        Download Full Business Plan
-      </button>
-      <p id="reportStatus" class="text-center text-sm font-semibold text-secondary hidden"></p>
-      <a id="githubLink" href="#" target="_blank" class="hidden block text-center text-secondary font-semibold underline text-sm">View on GitHub →</a>
-    </div>
-</main>
-<script>
-// Populate from localStorage
-const result = JSON.parse(localStorage.getItem('vh_business_result') || 'null');
-if (result) {
-  document.getElementById('bizTitle').textContent = result.business_idea || 'Your Business Idea';
-  const cost = result.startup_cost_inr ? '₹' + result.startup_cost_inr.toLocaleString('en-IN') : '₹2.5L - 5L';
-  document.getElementById('startupCost').textContent = 'Startup: ' + cost;
-  const steps = result.first_3_steps || [];
-  if (steps[0]) { document.getElementById('step1Title').textContent = 'Step 1'; document.getElementById('step1Desc').textContent = steps[0]; }
-  if (steps[1]) { document.getElementById('step2Title').textContent = 'Step 2'; document.getElementById('step2Desc').textContent = steps[1]; }
-  if (steps[2]) { document.getElementById('step3Title').textContent = 'Step 3'; document.getElementById('step3Desc').textContent = steps[2]; }
-}
 
-async function generateReport() {
-  const btn = document.getElementById('planBtn');
-  const status = document.getElementById('reportStatus');
-  btn.disabled = true; btn.textContent = 'Generating...';
-  status.textContent = '⏳ Calling AI to generate your weekly report...';
-  status.classList.remove('hidden');
-  try {
-    const data = await apiFetch('/weekly-report', { method: 'POST' });
-    if (data.success) {
-      status.textContent = '✅ Report ready!';
-      const link = document.getElementById('githubLink');
-      link.href = data.data.github_url;
-      link.classList.remove('hidden');
-      btn.textContent = '✅ Plan Generated!';
-    } else {
-      status.textContent = '⚠️ ' + (data.message || 'No transactions yet. Add some in Daily Log first!');
-      btn.disabled = false; btn.textContent = 'Download Full Business Plan';
-    }
-  } catch(e) {
-    status.textContent = '❌ ' + e.message;
-    btn.disabled = false; btn.textContent = 'Download Full Business Plan';
-  }
-}
-</script>
-<!-- BottomNavBar -->
-<nav
-  class="fixed bottom-0 left-0 w-full flex justify-around items-end pb-6 px-4 bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl z-50 rounded-t-[2rem] shadow-[0_-10px_40px_-10px_rgba(15,23,42,0.1)] md:hidden">
-  <a href="../home_modern/code.html" class="flex flex-col items-center justify-center text-slate-400 px-4 py-2 hover:text-purple-500 transition-colors">
-    <span class="material-symbols-outlined">home</span>
-    <span class="font-['Manrope'] text-[11px] font-semibold uppercase tracking-wider">Home</span>
-  </a>
-  <a href="../business_result_modern/code.html" class="flex flex-col items-center justify-center bg-gradient-to-br from-purple-600 to-purple-800 text-white rounded-2xl px-5 py-2 scale-110 -translate-y-2 shadow-lg shadow-purple-500/30">
-    <span class="material-symbols-outlined">insights</span>
-    <span class="font-['Manrope'] text-[11px] font-semibold uppercase tracking-wider">Results</span>
-  </a>
-  <a href="../daily_log_modern/code.html" class="flex flex-col items-center justify-center text-slate-400 px-4 py-2 hover:text-purple-500 transition-colors">
-    <span class="material-symbols-outlined">edit_note</span>
-    <span class="font-['Manrope'] text-[11px] font-semibold uppercase tracking-wider">Daily</span>
-  </a>
-  <a href="../weekly_report_modern/code.html" class="flex flex-col items-center justify-center text-slate-400 px-4 py-2 hover:text-purple-500 transition-colors">
-    <span class="material-symbols-outlined">date_range</span>
-    <span class="font-['Manrope'] text-[11px] font-semibold uppercase tracking-wider">Weekly</span>
-  </a>
-</nav>
+  <div class="hero fade-up">
+    <p class="hero-eyebrow">Empowering Ambition</p>
+    <h1 class="hero-title">Turn your<br><span>skills into</span><br>a business</h1>
+    <p class="hero-sub">Your AI co-founder is ready. Scan, plan, and grow — all in one place.</p>
+    <button class="hero-cta" onclick="window.location.href='home.html'">
+      Get Started
+      <span class="material-symbols-outlined" style="font-size:18px;">arrow_forward</span>
+    </button>
+    <div class="scan-card">
+      <input type="file" id="imgInput" accept="image/*" capture="environment" style="display:none" />
+      <div class="scan-icon-wrap"
+        onclick="document.getElementById('imgInput').click();this.style.transform='scale(0.95)';setTimeout(()=>this.style.transform='',150)"
+        style="cursor:pointer;transition:transform 0.15s;">
+        <span class="material-symbols-outlined"
+          style="font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24;">photo_camera</span>
+      </div>
+      <div class="scan-label">Show Me<br>What You Have</div>
+    </div>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-card fade-up">
+      <div class="stat-icon purple"><span class="material-symbols-outlined">trending_up</span></div>
+      <div class="stat-num">₹84K</div>
+      <div class="stat-label">Revenue</div>
+    </div>
+    <div class="stat-card fade-up">
+      <div class="stat-icon pink"><span class="material-symbols-outlined">shopping_bag</span></div>
+      <div class="stat-num">₹22K</div>
+      <div class="stat-label">Expenses</div>
+    </div>
+    <div class="stat-card fade-up">
+      <div class="stat-icon green"><span class="material-symbols-outlined">savings</span></div>
+      <div class="stat-num">₹62K</div>
+      <div class="stat-label">Profit</div>
+    </div>
+  </div>
+
+  <div class="section-wrap" style="margin-top:28px;">
+    <div class="section-head">
+      <h2 class="section-title">Your Journey</h2>
+      <span class="section-link">View All</span>
+    </div>
+    <div class="journey-track">
+      <div class="track-line"></div>
+      <div class="milestone">
+        <div class="milestone-dot done"></div>
+        <div class="milestone-tag done">✓ Completed</div>
+        <div class="milestone-name">Concept Definition</div>
+      </div>
+      <div class="milestone">
+        <div class="milestone-dot active"></div>
+        <div class="milestone-tag active">● In Progress</div>
+        <div class="milestone-name">Inventory Scan</div>
+        <div class="milestone-desc">Use the camera to catalog your resources.</div>
+      </div>
+      <div class="milestone">
+        <div class="milestone-dot locked"></div>
+        <div class="milestone-tag locked">🔒 Locked</div>
+        <div class="milestone-name locked">Business Launch</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-wrap">
+    <div class="section-head">
+      <h2 class="section-title">Quick Access</h2>
+    </div>
+    <div class="bento-grid">
+      <div class="bento-card full" onclick="window.location.href='results.html'" style="cursor:pointer;">
+        <div class="bento-icon purple"><span class="material-symbols-outlined">auto_awesome</span></div>
+        <div>
+          <div class="bento-title">Smart AI Analysis</div>
+          <div class="bento-sub">AI-powered market fit & business blueprint</div>
+        </div>
+        <span class="material-symbols-outlined"
+          style="margin-left:auto;color:var(--on-surface-variant);font-size:18px;">chevron_right</span>
+      </div>
+      <div class="bento-card" onclick="window.location.href='daily.html'" style="cursor:pointer;">
+        <div class="bento-icon pink"><span class="material-symbols-outlined">edit_note</span></div>
+        <div class="bento-title">Daily Log</div>
+        <div class="bento-sub">Track sales & expenses</div>
+        <div class="bento-badge">3 today</div>
+      </div>
+      <div class="bento-card dark" onclick="window.location.href='weekly.html'" style="cursor:pointer;">
+        <div class="bento-icon white"><span class="material-symbols-outlined">date_range</span></div>
+        <div class="bento-title light">Weekly Report</div>
+        <div class="bento-sub light">Insight dashboard</div>
+      </div>
+    </div>
+  </div>
+
+  <nav>
+    <a href="home.html" class="nav-item active">
+      <span class="material-symbols-outlined">home</span>
+      <span class="label">Home</span>
+    </a>
+    <a href="results.html" class="nav-item">
+      <span class="material-symbols-outlined">insights</span>
+      <span class="label">Results</span>
+    </a>
+    <a href="daily.html" class="nav-item">
+      <span class="material-symbols-outlined">edit_note</span>
+      <span class="label">Daily</span>
+    </a>
+    <a href="weekly.html" class="nav-item">
+      <span class="material-symbols-outlined">date_range</span>
+      <span class="label">Weekly</span>
+    </a>
+  </nav>
+
 </body>
 
 </html>
